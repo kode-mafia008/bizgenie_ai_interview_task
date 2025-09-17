@@ -29,8 +29,8 @@ This solution implements all three required components for the BizGenie AI Engin
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/kode-mafia008/biggenie-ai-interview-task.git
-   cd biggenie-ai-interview-task
+   git clone https://github.com/kode-mafia008/bizgenie_ai_interview_task.git
+   cd bizgenie_ai_interview_task
    ```
 
 2. **Make the entry script executable**
@@ -57,8 +57,8 @@ This solution implements all three required components for the BizGenie AI Engin
 
 1. **Clone and navigate to project**
    ```bash
-   git clone https://github.com/kode-mafia008/biggenie-ai-interview-task.git
-   cd biggenie-ai-interview-task
+   git clone https://github.com/kode-mafia008/bizgenie_ai_interview_task.git
+   cd bizgenie_ai_interview_task
    ```
 
 2. **Create virtual environment**
@@ -205,14 +205,14 @@ Rank all proposals using the multi-criteria scoring system.
 
 **Match Freelancers:**
 ```bash
-curl -X POST "http://localhost:8000/match_freelancers" \
+curl -X POST "http://localhost:8080/match_freelancers" \
   -H "Content-Type: application/json" \
   -d '{"project_description": "Need a Python developer for machine learning project"}'
 ```
 
 **Rank Proposals:**
 ```bash
-curl -X POST "http://localhost:8000/rank_proposals"
+curl -X POST "http://localhost:8080/rank_proposals"
 ```
 
 ### Python Client Example
@@ -222,13 +222,13 @@ import requests
 
 # Match freelancers
 response = requests.post(
-    "http://localhost:8000/match_freelancers",
+    "http://localhost:8080/match_freelancers",
     json={"project_description": "UI/UX design for mobile app"}
 )
 matches = response.json()["matches"]
 
 # Rank proposals  
-response = requests.post("http://localhost:8000/rank_proposals")
+response = requests.post("http://localhost:8080/rank_proposals")
 rankings = response.json()["ranked_proposals"]
 ```
 
