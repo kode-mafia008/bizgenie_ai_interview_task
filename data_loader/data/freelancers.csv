@@ -1,0 +1,9 @@
+freelancer_id,name,skills,experience_years,rating
+F001,Alice Johnson,"Python, Machine Learning, NLP",5,4.8
+F002,Bob Smith,"Laravel, PHP, MySQL",4,4.5
+F003,Charlie Lee,"React, Node.js, Frontend Development",3,4.2
+F004,Diana Garcia,"Data Science, Deep Learning, PyTorch",6,4.9
+F005,Ethan Patel,"UI/UX Design, Figma, Adobe XD",2,4.1
+F006,Fatima Noor,"Fullstack Development, Python, React",4,4.6
+F007,George Brown,"DevOps, Docker, Kubernetes",7,4.7
+F008,Hina Khan,"Data Analysis, SQL, Power BI",3,4.3

@@ -1,0 +1,6 @@
+proposal_id,freelancer_id,relevance_score,rating,bid_price,success_rate
+PR001,F001,0.92,4.8,1200,95
+PR002,F002,0.75,4.5,1000,90
+PR003,F004,0.88,4.9,1500,97
+PR004,F006,0.85,4.6,1100,92
+PR005,F008,0.7,4.3,900,85
