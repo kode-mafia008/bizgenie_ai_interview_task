@@ -16,71 +16,137 @@ This solution implements all three required components for the BizGenie AI Engin
 - **Real-Time Inference**: Optimized for fast API responses
 
 ## Setup Instructions
+ 
+## 🛠️ Prerequisites
 
-### 1. Install Dependencies
+- Python 3.12+
+- Docker and Docker Compose
+- Git
 
-```bash
-pip install -r requirements.txt
+## 📦 Installation & Setup
+
+### Option 1: Docker Deployment (Recommended)
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/kode-mafia008/biggenie-ai-interview-task.git
+   cd biggenie-ai-interview-task
+   ```
+
+2. **Make the entry script executable**
+   ```bash
+   chmod +x entryPoint.sh
+   ```
+
+3. **Start the application**
+   ```bash
+   ./entryPoint.sh
+   ```
+
+   This will:
+   - Create a `.env` file if it doesn't exist
+   - Build the Docker image with all dependencies
+   - Start the container in detached mode
+   - Display application logs
+
+4. **Access the application**
+   - API Documentation: http://localhost:8080/docs
+   - Main endpoint: http://localhost:8080/
+
+### Option 2: Local Development
+
+1. **Clone and navigate to project**
+   ```bash
+   git clone https://github.com/kode-mafia008/biggenie-ai-interview-task.git
+   cd biggenie-ai-interview-task
+   ```
+
+2. **Create virtual environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run the application**
+   ```bash
+   uvicorn main:app --host 0.0.0.0 --port 8080 --reload
+   ```
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+PORT=8080
+ENVIRONMENT=development
+PYTHONPATH=/app
 ```
 
-### 2. Run the Demo Scripts
+### Docker Configuration
 
-```bash
-python main.py
-```
+The application uses the following Docker setup:
 
-This will demonstrate both the similarity search and proposal ranking functionality with the provided sample data.
+- **Base Image**: `python:3.12-slim-bullseye`
+- **Port**: 8080
+- **Working Directory**: `/app`
+- **User**: Non-root user for security
 
-### 3. Start the API Service
+## 🚀 Usage
 
-```bash
-uvicorn main:app --reload --port 8000
-```
+### API Endpoints
 
-The API will be available at `http://localhost:8000`
+Once the application is running, visit http://localhost:8080/docs for interactive API documentation.
 
-### 4. View API Documentation
+#### Core Endpoints
 
-Visit `http://localhost:8000/docs` for interactive Swagger documentation.
+- `GET /` - Health check endpoint
+- `POST /recommend` - Get personalized service recommendations
+- `POST /chatbot` - Interact with the AI chatbot
 
-## API Endpoints
+## 🛠️ Troubleshooting
 
-### POST /match_freelancers
+### Common Issues
 
-Find the top 3 most relevant freelancers for a project.
+1. **Port already in use**
+   ```bash
+   # Change port in docker-compose.yaml or kill existing process
+   lsof -ti:8080 | xargs kill -9
+   ```
 
-**Request:**
-```json
-{
-  "project_description": "Need an AI system that ranks freelancer proposals using embeddings and vector similarity search."
-}
-```
+2. **Model loading errors**
+   - The system includes fallback mode for missing models
+   - Check logs for "fallback mode" messages
+   - Ensure model files exist in `ai_integration/models/`
 
-**Response:**
-```json
-{
-  "matches": [
-    {
-      "freelancer_id": "F001",
-      "name": "Alice Johnson", 
-      "skills": "Python, Machine Learning, NLP",
-      "score": 0.847
-    },
-    {
-      "freelancer_id": "F004",
-      "name": "Diana Garcia",
-      "skills": "Data Science, Deep Learning, PyTorch", 
-      "score": 0.723
-    },
-    {
-      "freelancer_id": "F006",
-      "name": "Fatima Noor",
-      "skills": "Fullstack Development, Python, React",
-      "score": 0.612
-    }
-  ]
-}
-```
+3. **Docker build failures**
+   ```bash
+   # Clean Docker cache
+   docker system prune -a
+   docker compose build --no-cache
+   ```
+
+4. **Dependency issues**
+   ```bash
+   # Rebuild with fresh dependencies
+   pip install --upgrade -r requirements.txt
+   ```
+
+
+
+## 📈 Monitoring
+
+### Application Health
+- Check `/` endpoint for basic health status
+- Monitor Docker logs: `docker compose logs -f`
+- API documentation: `/docs` endpoint
+
 
 ### POST /rank_proposals
 
@@ -102,6 +168,7 @@ Rank all proposals using the multi-criteria scoring system.
   ]
 }
 ```
+
 
 ## Technical Architecture
 
@@ -203,3 +270,30 @@ For project: *"Need an AI system that ranks freelancer proposals using embedding
 - `pandas`: Data manipulation
 - `numpy`: Numerical computations
 - `uvicorn`: ASGI server for FastAPI
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make changes and test thoroughly
+4. Submit a pull request with detailed description
+
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+## 🆘 Support
+
+For issues and questions:
+1. Check the troubleshooting section above
+2. Review Docker logs for error details
+3. Ensure all dependencies are properly installed
+4. Verify model files are present and accessible
+
+## 🔄 Version History
+
+- **v1.0.0**: Initial release with recommendation system and chatbot
+- **v1.1.0**: Added Docker support and improved error handling
+- **v1.2.0**: Enhanced model performance and fallback mechanisms
